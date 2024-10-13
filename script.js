@@ -9,15 +9,50 @@ document.getElementById('calculatorForm').addEventListener('submit', function (e
     .then(response => response.json())
     .then(data => {
       const result = data.results;
-      document.getElementById('result').innerHTML = `
-        <h2>Results</h2>
-        <p><strong>Display Value:</strong> ${result.display_value}</p>
-        <p><strong>Inches:</strong> ${result.inches.standard} inches</p>
-        <p><strong>Feet:</strong> ${result.feet.standard} feet</p>
-        <p><strong>Millimeters:</strong> ${result.millimeters.standard} mm</p>
-        <p><strong>Centimeters:</strong> ${result.centimeters.standard} cm</p>
-        <p><strong>Meters:</strong> ${result.meters.standard} m</p>
-      `;
+
+      // Clear previous results
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '';  // Clear previous results
+
+      // Function to safely create elements with text content
+      function createResultItem(label, value) {
+        const p = document.createElement('p');
+        const strongLabel = document.createElement('strong');
+        strongLabel.textContent = label;
+
+        const spanValue = document.createElement('span');
+        spanValue.textContent = ` ${value} `;
+
+        const copyButton = document.createElement('button');
+        copyButton.textContent = 'Copy';
+        copyButton.className = 'copy-btn';
+        copyButton.setAttribute('data-copy', value);
+
+        // Attach copy button functionality
+        copyButton.addEventListener('click', function () {
+          const textToCopy = value; // Copy the value directly
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            alert(`Copied to clipboard: ${textToCopy}`);
+          }).catch(err => {
+            console.error('Error copying to clipboard', err);
+          });
+        });
+
+        // Append label, value, and copy button
+        p.appendChild(strongLabel);
+        p.appendChild(spanValue);
+        p.appendChild(copyButton);
+
+        resultDiv.appendChild(p);
+      }
+
+      // Create and append each result item
+      createResultItem('Display Value:', result.display_value);
+      createResultItem('Inches:', `${result.inches.standard} inches`);
+      createResultItem('Feet:', `${result.feet.standard} feet`);
+      createResultItem('Millimeters:', `${result.millimeters.standard} mm`);
+      createResultItem('Centimeters:', `${result.centimeters.standard} cm`);
+      createResultItem('Meters:', `${result.meters.standard} m`);
     })
     .catch(err => console.error('Error fetching data: ', err));
 });

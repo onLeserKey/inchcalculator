@@ -1,0 +1,93 @@
+
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4;
+  color: #333;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #007bff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  font-size: 1.2em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+/* Result Styling */
+#result {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+/* Copy Button Styling */
+.copy-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 3px;
+}
+
+  .copy-btn:hover {
+    background-color: #218838;
+  }
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  input[type="text"] {
+    font-size: 1em;
+  }
+
+  button {
+    font-size: 1em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+}
