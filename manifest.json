@@ -1,7 +1,7 @@
 {
   "name": "Measurement Calculator",
   "short_name": "Calc",
-  "start_url": "/index.html",
+  "start_url": "/inchcalculator/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
