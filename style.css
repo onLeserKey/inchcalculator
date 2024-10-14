@@ -50,6 +50,10 @@ button {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+h3 {
+  text-align: center;
+  margin: 5px;
+}
 p {
   font-size: 1.0em;
   margin: 10px 0;
