@@ -17,8 +17,11 @@ document.getElementById('calculatorForm').addEventListener('submit', function (e
       // Function to sanitize HTML and insert a non-breaking space before the first <span>
       function sanitizeHtml(html) {
         const tempDiv = document.createElement('div');
-        const cleanHtml = html.replace('<span', '&nbsp;<span');
-        tempDiv.innerHTML = cleanHtml;
+        let cleanHtml = html;
+        if (html.indexOf(' <span class="inch-fraction') == -1) {
+          cleanHtml = html.replace('<span class="inch-fraction', ' <span class="inch-fraction');
+        }
+        tempDiv.innerHTML = cleanHtml.trim();
         return tempDiv.textContent || tempDiv.innerText || '';
       }
 
@@ -77,7 +80,7 @@ document.getElementById('calculatorForm').addEventListener('submit', function (e
       // Function to handle complex measurements with feet, inches, and fractions
       function roundMeasurement(measurement) {
         measurement = sanitizeHtml(measurement);
-        const feetInchesRegex = /(?:(\d+)')?\s*(?:(\d+))?\s*(\d+\/\d+)?"/;
+        const feetInchesRegex = /(?:(?:(?<Feet>\d+)[ ]*(?:'|ft)){0,1}[ ]*(?<Inches>\d*(?![\/\w])){0,1}(?:[ ,\-]){0,1}(?<Fraction>(?<FracNum>\d*)\/(?<FracDem>\d*)){0,1}(?<Decimal>\.\d*){0,1}(?:\x22| in))|(?:(?<Feet2>\d+)[ ]*(?:'|ft)[ ]*){1}/;
         const match = measurement.match(feetInchesRegex);
 
         if (match) {
@@ -87,6 +90,14 @@ document.getElementById('calculatorForm').addEventListener('submit', function (e
 
           if (fraction) {
             fraction = roundFraction(fraction);
+            if (fraction == "1/1") {
+              fraction = "";
+              inches = parseInt("0"+inches) + 1;
+              if (inches==12 /*&& feet!=""*/) {
+                inches = "";
+                feet = parseInt("0"+feet) + 1 + "'";
+              }
+            }
           }
 
           let result = `${feet} ${inches}`;
