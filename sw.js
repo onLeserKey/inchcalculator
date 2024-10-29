@@ -6,8 +6,7 @@ self.addEventListener('install', function (event) {
         '/index.html',
         '/style.css',
         '/script.js',
-        '/icon-192.png',
-        '/icon-512.png'
+        '/inch-calculator-logo.svg'
       ]);
     })
   );
