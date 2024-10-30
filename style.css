@@ -74,9 +74,42 @@ strong {
   border-radius: 3px;
 }
 
-  .copy-btn:hover {
-    background-color: #218838;
-  }
+.copy-btn:hover {
+  background-color: #218838;
+}
+
+#keypad-container {
+  display: block; 
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+}
+
+#calculate-btn {
+  display: none;
+}
+
+.keypad-row {
+  display: flex;
+}
+
+.keypad-btn {
+  /*flex: 1;*/
+  padding: 6px;
+  margin: 2px;
+  font-size: 1.5em;
+  cursor: pointer;
+  width: 15%;
+}
+
+.keypad-dbl {
+  width: 30%;
+}
+
+#toggle-keypad-btn {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1em;
+}
 
 @media (max-width: 600px) {
   body {

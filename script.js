@@ -1,6 +1,7 @@
 document.getElementById('calculatorForm').addEventListener('submit', function (e) {
   e.preventDefault();
-
+  const toggleKeypadBtn = document.getElementById('toggle-keypad-btn');
+  toggleKeypadBtn.focus();
   const expression = document.getElementById('expressionInput').value;
   const encodedExpression = encodeURIComponent(expression);
   const apiUrl = `https://www.inchcalculator.com/api/calculators/feet-and-inches/?uc_length=${encodedExpression}`;
@@ -167,3 +168,57 @@ document.getElementById('calculatorForm').addEventListener('submit', function (e
     })
     .catch(err => console.error('Error fetching data: ', err));
 });
+
+
+
+// Keypad Functions
+document.addEventListener('DOMContentLoaded', function () {
+  const expressionInput = document.getElementById('expressionInput');
+  const keypadContainer = document.getElementById('keypad-container');
+  const toggleKeypadBtn = document.getElementById('toggle-keypad-btn');
+  const calculateBtn = document.getElementById('calculate-btn');
+
+  // Toggle between phone keyboard and custom keypad
+  toggleKeypadBtn.addEventListener('click', function () {
+    if (keypadContainer.style.display === 'none') {
+      calculateBtn.style.display = "none";
+      keypadContainer.style.display = 'block';
+      toggleKeypadBtn.textContent = 'Hide Keypad';
+      expressionInput.blur(); // Hides the phone keyboard
+    } else {
+      calculateBtn.style.display = "block";
+      keypadContainer.style.display = 'none';
+      toggleKeypadBtn.textContent = 'Show Keypad';
+    }
+  });
+
+  // Keypad button functionality
+  document.querySelectorAll('.keypad-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const key = btn.getAttribute('data-key') || '';
+      let cursorPos = expressionInput.value.length; // expressionInput.selectionStart;
+      let currentText = expressionInput.value;
+
+      switch (key) {
+        case 'backspace':
+          // Remove the last character
+          expressionInput.value = currentText.slice(0, cursorPos - 1) + currentText.slice(cursorPos);
+          expressionInput.setSelectionRange(cursorPos - 1, cursorPos - 1);
+          break;
+        case 'clear':
+          if (confirm('Are you sure you want to clear the screen?')) {
+            expressionInput.value = '';
+          }
+          break;
+        case 'space':
+          expressionInput.setRangeText(' ', cursorPos, cursorPos, 'end');
+          break;
+        default:
+          expressionInput.setRangeText(key, cursorPos, cursorPos, 'end');
+          break;
+      }
+    });
+  });
+});
+
+
