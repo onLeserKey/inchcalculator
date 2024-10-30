@@ -7,7 +7,8 @@ This is a custom calculator for measurements, including feet and inches, with a 
 ## Inner Workings
 
 - **Custom Keypad**: A numeric keypad is provided to simplify input on mobile devices, especially for measurements involving inches and feet.
-- **Measurement Parsing**: The page uses a combination of JavaScript and regex to parse measurement expressions, allowing users to input values like `1' 2 5/8"`.
+- **Measurement Parsing**: The page uses a combination of JavaScript and regex to parse measurement expressions, allowing users to input values like `1' 2 5/8"`. 
+- **Expression Evaluation** The expression is evaluated via an API call to the www.inchcalculator.com service that return a JSON result for presentation. Some cleansing is done before presentation of the results.
 - **Rounding**: The `roundFraction` function rounds fractional values to common construction-friendly values such as `1/8`, `1/4`, and `1/2`. This ensures that measurements are presented in a practical format.
 
 ## Adding a Shortcut to Your Home Screen (iPhone)
