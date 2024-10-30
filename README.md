@@ -24,4 +24,5 @@ To add the calculator to your iPhone home screen for easy access:
 The calculator will now appear on your home screen like an app.
 
 API Copyright www.inchcalculator.com
-Credi for regex expression - https://regexlib.com/REDetails.aspx?regexp_id=2127
+
+Credit for regex expression to https://regexlib.com/REDetails.aspx?regexp_id=2127
