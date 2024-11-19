@@ -81,13 +81,13 @@ document.getElementById('calculatorForm').addEventListener('submit', function (e
       // Function to handle complex measurements with feet, inches, and fractions
       function roundMeasurement(measurement) {
         measurement = sanitizeHtml(measurement);
-        const feetInchesRegex = /(?:(?:(?<Feet>\d+)[ ]*(?:'|ft)){0,1}[ ]*(?<Inches>\d*(?![\/\w])){0,1}(?:[ ,\-]){0,1}(?<Fraction>(?<FracNum>\d*)\/(?<FracDem>\d*)){0,1}(?<Decimal>\.\d*){0,1}(?:\x22| in))|(?:(?<Feet2>\d+)[ ]*(?:'|ft)[ ]*){1}/;
+        const feetInchesRegex = /(?:(?:(?<Feet>\d+)[ ]*(?:'|ft)){0,1}[ ]*(?<Inches>\d*(?![\/\w])){0,1}(?:[ ,\-]){0,1}(?<Fraction>(?<FracNum>\d*)\/(?<FracDem>\d*)){0,1}(?<Decimal>\.\d*){0,1}(?:\x22| in))|(?:(?<Feet>\d+)[ ]*(?:'|ft)[ ]*){1}/;
         const match = measurement.match(feetInchesRegex);
 
         if (match) {
-          let feet = match[1] ? match[1] + "'" : '';
-          let inches = match[2] ? match[2] : '';
-          let fraction = match[3] ? match[3] : '';
+          let feet = match[1] || match.groups['Feet'] ? (match[1] || match.groups['Feet']) + "'" : '';
+          let inches = match[2] || match.groups['Inches'] ? match[2] || match.groups['Inches'] : '';
+          let fraction = match[3] || match.groups['Inches'] ? match[3] || match.groups['Fraction'] : '';
 
           if (fraction) {
             fraction = roundFraction(fraction);
